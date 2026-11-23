@@ -1,0 +1,21 @@
+{
+  "handle": "Yanagi42",
+  "display_name": "Yanagi",
+  "blog": null,
+  "projects": [
+    {
+      "name": "SubVault",
+      "repo": "https://github.com/Yanagi42/SubVault",
+      "demo": "https://yanagi42.github.io/SubVault/",
+      "stack": ["Rust", "SQLite"],
+      "summary": "本地加密的订阅与账单凭证库。原始 PDF 和网页回执按内容哈希留存去重，随时可以导出带 SHA-256 校验的离线包。"
+    },
+    {
+      "name": "agy-gauge",
+      "repo": "https://github.com/Yanagi42/agy-gauge",
+      "demo": null,
+      "stack": ["Rust", "Direct2D", "Python"],
+      "summary": "Antigravity 的 Windows 本地用量仪表盘。用 Direct2D 绘出右下角悬浮胶囊与详情面板，配套 `/statusline` 桥接和 CLI。"
+    }
+  ]
+}

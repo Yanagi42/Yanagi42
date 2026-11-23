@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="120" viewBox="0 0 880 120" role="img" aria-label="Yanagi (@Yanagi42)">
+  <title>Yanagi (@Yanagi42)</title>
+  <defs>
+    <linearGradient id="ruleFade" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="880" y2="0">
+      <stop offset="0%" stop-color="#262C36" stop-opacity="0.95"/>
+      <stop offset="78%" stop-color="#262C36" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#262C36" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Minimalist willow motif (right) -->
+    <g fill="none" stroke="#4F645E" stroke-linecap="round" opacity="0.60">
+    <path d="M 878.0,5.0 C 840.0,9.0 802.0,20.0 766.0,40.0" stroke-width="1.15"/>
+    <path d="M 786.0,29.0 C 776.0,52.0 764.0,77.0 750.0,102.0" stroke-width="0.95"/>
+    <path d="M 818.0,18.0 C 810.0,42.0 802.0,67.0 789.0,94.0" stroke-width="0.9"/>
+    <path d="M 850.0,10.0 C 845.0,32.0 839.0,56.0 829.0,80.0" stroke-width="0.8"/>
+  </g>
+  <g>
+    <path d="M 0,0 Q 2.5,5.8 0,13.5 Q -2.5,5.8 0,0 Z" transform="translate(780.4,41.6) rotate(50.4) scale(0.88)" fill="#6E9188" opacity="0.56"/>
+    <path d="M 0,0 Q 2.5,5.8 0,13.5 Q -2.5,5.8 0,0 Z" transform="translate(773.4,56.7) rotate(1.5) scale(0.94)" fill="#6E9188" opacity="0.66"/>
+    <path d="M 0,0 Q 2.5,5.8 0,13.5 Q -2.5,5.8 0,0 Z" transform="translate(765.8,72.1) rotate(50.7) scale(0.98)" fill="#7AB3C4" opacity="0.82"/>
+    <path d="M 0,0 Q 2.5,5.8 0,13.5 Q -2.5,5.8 0,0 Z" transform="translate(758.2,87.0) rotate(5.9) scale(0.84)" fill="#6E9188" opacity="0.52"/>
+    <path d="M 0,0 Q 2.5,5.8 0,13.5 Q -2.5,5.8 0,0 Z" transform="translate(812.7,34.0) rotate(42.6) scale(0.84)" fill="#6E9188" opacity="0.52"/>
+    <path d="M 0,0 Q 2.5,5.8 0,13.5 Q -2.5,5.8 0,0 Z" transform="translate(806.5,51.9) rotate(-4.2) scale(0.92)" fill="#6E9188" opacity="0.64"/>
+    <path d="M 0,0 Q 2.5,5.8 0,13.5 Q -2.5,5.8 0,0 Z" transform="translate(799.5,70.2) rotate(44.0) scale(0.86)" fill="#6E9188" opacity="0.54"/>
+    <path d="M 0,0 Q 2.5,5.8 0,13.5 Q -2.5,5.8 0,0 Z" transform="translate(792.8,86.0) rotate(4.4) scale(0.76)" fill="#6E9188" opacity="0.44"/>
+    <path d="M 0,0 Q 2.5,5.8 0,13.5 Q -2.5,5.8 0,0 Z" transform="translate(845.8,27.5) rotate(38.0) scale(0.8)" fill="#6E9188" opacity="0.48"/>
+    <path d="M 0,0 Q 2.5,5.8 0,13.5 Q -2.5,5.8 0,0 Z" transform="translate(840.6,47.1) rotate(-5.6) scale(0.86)" fill="#6E9188" opacity="0.54"/>
+    <path d="M 0,0 Q 2.5,5.8 0,13.5 Q -2.5,5.8 0,0 Z" transform="translate(834.0,67.1) rotate(39.9) scale(0.76)" fill="#6E9188" opacity="0.42"/>
+  </g>
+
+  <!-- Clean wordmark + handle -->
+  <text x="2" y="60" font-family="Georgia, 'Noto Serif SC', 'Songti SC', 'STSong', serif" font-size="42" font-weight="400" letter-spacing="-0.4" fill="#E6EDF3">Yanagi</text>
+  <text x="4" y="86" font-family="ui-monospace, 'SFMono-Regular', 'Cascadia Mono', Consolas, monospace" font-size="12.5" letter-spacing="0.2" fill="#76808B">@Yanagi42</text>
+
+  <!-- Hairline separator -->
+  <rect x="0" y="112" width="880" height="1" fill="url(#ruleFade)"/>
+</svg>
