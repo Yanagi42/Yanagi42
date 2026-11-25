@@ -5,12 +5,15 @@ borderless header SVGs. Zero external dependencies (Python 3 stdlib only).
 
 Usage:
     python scripts/generate.py
+    python scripts/generate.py --check
 """
 
 from __future__ import annotations
 
+import argparse
 import json
 import math
+import sys
 from pathlib import Path
 from xml.sax.saxutils import escape
 
@@ -195,23 +198,82 @@ def render_readme(cfg: dict) -> str:
     return "\n".join(lines).rstrip() + "\n"
 
 
-def main() -> None:
-    cfg = json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
+def expected_artifacts(cfg: dict) -> dict[Path, str]:
+    artifacts: dict[Path, str] = {
+        ASSETS_DIR / f"header-{theme}.svg": render_header(cfg, theme)
+        for theme in ("light", "dark")
+    }
+    artifacts[README_PATH] = render_readme(cfg)
+    return artifacts
+
+
+def check_artifacts(cfg: dict) -> int:
+    expected = expected_artifacts(cfg)
+    expected_svg_names = {p.name for p in expected if p.parent == ASSETS_DIR}
+    drifted: list[str] = []
+
+    for path, expected_text in expected.items():
+        rel = path.relative_to(ROOT).as_posix()
+        if not path.exists():
+            drifted.append(f"missing: {rel}")
+            continue
+        actual_text = path.read_text(encoding="utf-8")
+        if actual_text != expected_text:
+            drifted.append(f"out-of-date: {rel}")
+
+    if ASSETS_DIR.exists():
+        for existing in sorted(ASSETS_DIR.glob("*.svg")):
+            if existing.name not in expected_svg_names:
+                rel = existing.relative_to(ROOT).as_posix()
+                drifted.append(f"stale: {rel}")
+
+    if drifted:
+        print("Profile artifacts are out of sync with profile.json:", file=sys.stderr)
+        for item in drifted:
+            print(f"  - {item}", file=sys.stderr)
+        print("Run 'python scripts/generate.py' to regenerate.", file=sys.stderr)
+        return 1
+
+    print(
+        f"OK: {README_PATH.name} and {len(expected_svg_names)} SVGs match {CONFIG_PATH.name}."
+    )
+    return 0
+
+
+def generate_artifacts(cfg: dict) -> int:
     ASSETS_DIR.mkdir(parents=True, exist_ok=True)
 
-    keep = {"header-light.svg", "header-dark.svg"}
+    expected = expected_artifacts(cfg)
+    keep = {p.name for p in expected if p.parent == ASSETS_DIR}
     for stale in ASSETS_DIR.glob("*.svg"):
         if stale.name not in keep:
             stale.unlink()
 
-    for theme in ("light", "dark"):
-        (ASSETS_DIR / f"header-{theme}.svg").write_text(
-            render_header(cfg, theme), encoding="utf-8"
-        )
+    for path, content in expected.items():
+        path.write_text(content, encoding="utf-8", newline="\n")
 
-    README_PATH.write_text(render_readme(cfg), encoding="utf-8")
-    print(f"Generated {len(list(ASSETS_DIR.glob('*.svg')))} SVGs and updated {README_PATH.name}.")
+    print(
+        f"Generated {len(list(ASSETS_DIR.glob('*.svg')))} SVGs and updated {README_PATH.name}."
+    )
+    return 0
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description="Generate or verify Yanagi42 GitHub Profile README & header SVGs."
+    )
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="Verify generated README.md and SVGs match profile.json without writing files.",
+    )
+    args = parser.parse_args(argv)
+
+    cfg = json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
+    if args.check:
+        return check_artifacts(cfg)
+    return generate_artifacts(cfg)
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
